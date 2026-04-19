@@ -115,11 +115,23 @@ foreach ($page in $pageList) {
   )
 
   Invoke-External -FilePath "magick" -ArgumentList @(
+    "(",
     $refPng,
+    "-fuzz", "8%",
+    "-transparent", "white",
+    "-fill", "#0066ff",
+    "-colorize", "100",
+    ")",
+    "(",
     $candPng,
-    "-compose", "blend",
-    "-define", "compose:args=60,40",
-    "-composite",
+    "-fuzz", "8%",
+    "-transparent", "white",
+    "-fill", "#ff0000",
+    "-colorize", "100",
+    ")",
+    "-background", "white",
+    "-compose", "Over",
+    "-flatten",
     $blendPng
   )
 

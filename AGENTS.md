@@ -85,6 +85,7 @@ The compare script:
 - compiles the Typst example unless `-SkipCompile` is passed
 - renders requested pages one-by-one so filenames stay stable as `page-01.png`, `page-02.png`, etc.
 - refreshes `ref/`, `cand/`, `blend/`, and `side/` assets only for the requested pages
+- color-codes blend overlays so the reference image is blue and the Typst candidate is red
 
 ## Manual Fallback Commands
 
@@ -126,12 +127,18 @@ mutool draw -F png -r 144 -o "typst-template\compare\focus\cand\page-%02d.png" "
 
 ### 5. Build Overlay and Side-by-Side Images with ImageMagick
 
+For blend images, color-code the reference image in blue and the Typst candidate in red.
+
 ```powershell
 1..6 | ForEach-Object {
   $n = '{0:d2}' -f $_
-  magick "typst-template\compare\focus\ref\page-$n.png" `
-         "typst-template\compare\focus\cand\page-$n.png" `
-         -compose blend -define compose:args=60,40 -composite `
+  magick "(" "typst-template\compare\focus\ref\page-$n.png" `
+             -fuzz 8% -transparent white `
+             -fill "#0066ff" -colorize 100 ")" `
+         "(" "typst-template\compare\focus\cand\page-$n.png" `
+             -fuzz 8% -transparent white `
+             -fill red -colorize 100 ")" `
+         -background white -compose Over -flatten `
          "typst-template\compare\focus\blend\page-$n.png"
 
   magick "typst-template\compare\focus\ref\page-$n.png" `

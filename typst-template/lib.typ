@@ -1,12 +1,21 @@
 #let body_fonts = ("TeX Gyre Pagella", "Palatino Linotype", "Book Antiqua", "New Computer Modern")
 #let sans_fonts = ("TeX Gyre Heros", "Arial", "New Computer Modern")
 #let thesis_blue = rgb("#0000dc")
+#let latex_pdflatex_sans_scale = 0.863
+#let typst_titlepage_sans_correction = 0.83
 #let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 31mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
 #let faculty_logo_color = image("/assets/fi-color.svg", width: 45mm)
+
+// fithesis under pdfTeX uses tgheros scaled to 0.863. Typst uses the OTF
+// fonts directly, which renders slightly larger, so we keep one explicit
+// template-level correction here instead of tuning individual lines.
+#let titlepage_font_size(size) = {
+  size * latex_pdflatex_sans_scale * typst_titlepage_sans_correction * 1pt
+}
 
 #let chapter(title) = {
   pagebreak(weak: true)
@@ -42,12 +51,12 @@
   semester,
 ) = [
   #set page(margin: 0mm, numbering: none)
-  #centered_at(46.0mm, image("/assets/base-english-mono.svg", width: 61.2mm))
-  #centered_at(73.5mm, text(font: sans_fonts, size: 15.5pt)[#upper(faculty_name)])
-  #centered_at(99.2mm, text(font: sans_fonts, size: 26.0pt, weight: 600)[#title])
-  #centered_at(124.3mm, text(font: sans_fonts, size: 19.0pt)[#thesis_type])
-  #centered_at(147.5mm, text(font: sans_fonts, size: 21.8pt)[#upper(author)])
-  #centered_at(230.0mm, text(font: sans_fonts, size: 15.0pt)[#place_name, #semester])
+  #centered_at(46.5mm, image("/assets/base-english-mono.svg", width: 61.2mm))
+  #centered_at(75.3mm, text(font: sans_fonts, size: titlepage_font_size(18))[#upper(faculty_name)])
+  #centered_at(102.0mm, text(font: sans_fonts, size: titlepage_font_size(30), weight: "bold")[#title])
+  #centered_at(126.6mm, text(font: sans_fonts, size: titlepage_font_size(22))[#thesis_type])
+  #centered_at(149.8mm, text(font: sans_fonts, size: titlepage_font_size(25))[#upper(author)])
+  #centered_at(232.6mm, text(font: sans_fonts, size: titlepage_font_size(18))[#place_name, #semester])
 ]
 
 #let title_page(
@@ -62,13 +71,13 @@
 ) = [
   #set page(margin: 0mm, numbering: "i", number-align: bottom + right)
   #centered_at(44mm, university_logo_color)
-  #centered_at(72.9mm, text(font: sans_fonts, size: 15.4pt)[#upper(faculty_name)])
-  #centered_at(98.8mm, text(font: sans_fonts, size: 25pt, weight: 520, fill: thesis_blue)[#title])
-  #centered_at(124.0mm, text(font: sans_fonts, size: 18.8pt)[#thesis_type])
-  #centered_at(147.0mm, text(font: sans_fonts, size: 21.4pt)[#upper(author)])
-  #centered_at(191.7mm, text(font: sans_fonts, size: 14.4pt)[Advisor: #advisor])
-  #centered_at(205.6mm, text(font: sans_fonts, size: 14.4pt)[#department])
-  #centered_at(230.4mm, text(font: sans_fonts, size: 14.4pt)[#(place_name + ", " + semester)])
+  #centered_at(72.9mm, text(font: sans_fonts, size: titlepage_font_size(18))[#upper(faculty_name)])
+  #centered_at(98.8mm, text(font: sans_fonts, size: titlepage_font_size(30), weight: "bold", fill: thesis_blue)[#title])
+  #centered_at(124.0mm, text(font: sans_fonts, size: titlepage_font_size(22))[#thesis_type])
+  #centered_at(147.0mm, text(font: sans_fonts, size: titlepage_font_size(25))[#upper(author)])
+  #centered_at(191.7mm, text(font: sans_fonts, size: titlepage_font_size(18))[Advisor: #advisor])
+  #centered_at(205.6mm, text(font: sans_fonts, size: titlepage_font_size(18))[#department])
+  #centered_at(230.4mm, text(font: sans_fonts, size: titlepage_font_size(18))[#(place_name + ", " + semester)])
 ]
 
 #let seal_page() = [
