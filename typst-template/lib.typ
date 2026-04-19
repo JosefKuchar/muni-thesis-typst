@@ -42,6 +42,19 @@
 
 #let centered_at(dy, body) = place(top + center, dy: dy)[#body]
 
+#let centered_titlepage_text(
+  body,
+  size,
+  weight: "regular",
+  fill: black,
+  width: auto,
+) = align(center)[
+  #block(width: width)[
+    #set par(justify: false)
+    #text(font: sans_fonts, size: size, weight: weight, fill: fill)[#body]
+  ]
+]
+
 #let cover_page(
   faculty_name,
   title,
@@ -51,12 +64,38 @@
   semester,
 ) = [
   #set page(margin: 0mm, numbering: none)
-  #centered_at(46.5mm, image("/assets/base-english-mono.svg", width: 61.2mm))
-  #centered_at(75.3mm, text(font: sans_fonts, size: titlepage_font_size(18))[#upper(faculty_name)])
-  #centered_at(102.0mm, text(font: sans_fonts, size: titlepage_font_size(30), weight: "bold")[#title])
-  #centered_at(126.6mm, text(font: sans_fonts, size: titlepage_font_size(22))[#thesis_type])
-  #centered_at(149.8mm, text(font: sans_fonts, size: titlepage_font_size(25))[#upper(author)])
-  #centered_at(232.6mm, text(font: sans_fonts, size: titlepage_font_size(18))[#place_name, #semester])
+  #align(center)[
+    #v(46.5mm)
+    #image("/assets/base-english-mono.svg", width: 61.2mm)
+    #v(10.7mm)
+    #centered_titlepage_text(
+      upper(faculty_name),
+      titlepage_font_size(18),
+    )
+    #v(0.42fr)
+    #centered_titlepage_text(
+      title,
+      titlepage_font_size(30),
+      weight: "bold",
+      width: 129mm,
+    )
+    #v(15mm)
+    #centered_titlepage_text(
+      thesis_type,
+      titlepage_font_size(22),
+    )
+    #v(15mm)
+    #centered_titlepage_text(
+      upper(author),
+      titlepage_font_size(25),
+    )
+    #v(1.7fr)
+    #centered_titlepage_text(
+      [#place_name, #semester],
+      titlepage_font_size(18),
+    )
+    #v(43mm)
+  ]
 ]
 
 #let title_page(

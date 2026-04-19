@@ -28,6 +28,8 @@ Use tex source as secondary reference to understand margins, font sizes, colors 
 - Build visual blends and side-by-side comparisons with ImageMagick (`magick`).
 - Edit only the Typst source when iterating.
 - Prefer `typst-template/scripts/compile-typst.ps1` and `typst-template/scripts/compare-focus.ps1` for the standard workflow.
+- Do **not** run `compare-focus.ps1` concurrently with `compile-typst.ps1` or other scripts that read or write the same Typst PDF or comparison asset directories.
+- When one of those scripts is running, any other such script must wait until it finishes. Treat the workflow as serialized to avoid data races and partially refreshed comparison assets.
 
 ## Recommended Directory Layout for Comparisons
 
@@ -53,6 +55,8 @@ Use this structure inside `typst-template/compare/focus`:
 ## Preferred Commands
 
 Use these scripts from the repo root unless there is a specific reason not to.
+
+Run these scripts one at a time. Do not start another compile, render, or compare script until the current one has finished writing its outputs.
 
 ### 1. Compile Typst
 
