@@ -65,36 +65,36 @@
 ) = [
   #set page(margin: 0mm, numbering: none)
   #align(center)[
-    #v(46.5mm)
+    #v(46mm)
     #image("/assets/base-english-mono.svg", width: 61.2mm)
-    #v(10.7mm)
+    #v(6mm)
     #centered_titlepage_text(
       upper(faculty_name),
       titlepage_font_size(18),
     )
-    #v(0.42fr)
+    #v(18mm)
     #centered_titlepage_text(
       title,
       titlepage_font_size(30),
       weight: "bold",
       width: 129mm,
     )
-    #v(15mm)
+    #v(14mm)
     #centered_titlepage_text(
       thesis_type,
       titlepage_font_size(22),
     )
-    #v(15mm)
+    #v(14mm)
     #centered_titlepage_text(
       upper(author),
       titlepage_font_size(25),
     )
-    #v(1.7fr)
+    #v(0.7fr)
     #centered_titlepage_text(
       [#place_name, #semester],
       titlepage_font_size(18),
     )
-    #v(43mm)
+    #v(63mm)
   ]
 ]
 
@@ -188,10 +188,7 @@
   if chapter == none {
     none
   } else {
-    let local_index = entries
-      .slice(0, index + 1)
-      .filter(entry => chapter_number_at(entry.location()) == chapter)
-      .len()
+    let local_index = entries.slice(0, index + 1).filter(entry => chapter_number_at(entry.location()) == chapter).len()
     numbering("1.1", chapter, local_index)
   }
 }
@@ -219,8 +216,7 @@
   #front_title(title)
   #v(6mm)
   #context {
-    let entries = query(heading.where(outlined: true))
-      .filter(entry => entry.level <= 3)
+    let entries = query(heading.where(outlined: true)).filter(entry => entry.level <= 3)
 
     for entry in entries {
       let prefix = heading_outline_prefix(entry)
