@@ -1,0 +1,4 @@
+*.pdf
+!tex-rendered.pdf
+.tmp/
+*.png

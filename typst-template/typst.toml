@@ -1,0 +1,14 @@
+[package]
+name = "fi-muni-thesis"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["OpenAI Codex"]
+license = "MIT"
+description = "Masaryk University Faculty of Informatics thesis template matching the fithesis4 LaTeX layout."
+categories = ["thesis"]
+keywords = ["masaryk university", "faculty of informatics", "thesis"]
+compiler = "0.14.0"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
