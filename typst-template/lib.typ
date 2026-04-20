@@ -7,6 +7,8 @@
 #let body_leading = 6.25pt
 #let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 31mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
+#let front_matter_footer_descent = 8% + 0pt
+#let body_footer_descent = 0% - 12pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
@@ -108,7 +110,12 @@
   place_name,
   semester,
 ) = [
-  #set page(margin: 0mm, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: 0mm,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: front_matter_footer_descent,
+  )
   #align(center)[
     #v(46mm)
     #university_logo_color
@@ -155,13 +162,23 @@
 ]
 
 #let seal_page() = [
-  #set page(margin: 0mm, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: 0mm,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: front_matter_footer_descent,
+  )
   #v(79mm)
   #align(center)[#faculty_logo_color]
 ]
 
 #let declaration_page(title, body, author, advisor) = [
-  #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: front_matter_page_margin,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: front_matter_footer_descent,
+  )
   #set text(size: body_font_size)
   #set par(first-line-indent: 0pt, justify: true, leading: body_leading)
   #front_title(title)
@@ -174,7 +191,12 @@
 ]
 
 #let thanks_page(title, body) = [
-  #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: front_matter_page_margin,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: front_matter_footer_descent,
+  )
   #set text(size: body_font_size)
   #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
   #v(1fr)
@@ -189,7 +211,12 @@
   keywords_title,
   keywords,
 ) = [
-  #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: front_matter_page_margin,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: front_matter_footer_descent,
+  )
   #set text(size: body_font_size)
   #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
   #front_title(abstract_title)
@@ -249,7 +276,12 @@
 ]
 
 #let contents_page(title) = [
-  #set page(margin: body_page_margin, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: body_page_margin,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: body_footer_descent,
+  )
   #set par(first-line-indent: 0pt)
   #front_title(title)
   #v(6mm)
@@ -281,7 +313,12 @@
 ]
 
 #let listing_page(title, kind) = [
-  #set page(margin: body_page_margin, numbering: "i", number-align: bottom + right)
+  #set page(
+    margin: body_page_margin,
+    numbering: "i",
+    number-align: bottom + right,
+    footer-descent: body_footer_descent,
+  )
   #set par(first-line-indent: 0pt)
   #front_title(title)
   #v(6mm)
@@ -422,7 +459,12 @@
     ]
 
     #pagebreak()
-    #set page(margin: body_page_margin, numbering: "1", number-align: bottom + right)
+    #set page(
+      margin: body_page_margin,
+      numbering: "1",
+      number-align: bottom + right,
+      footer-descent: body_footer_descent,
+    )
     #counter(page).update(1)
     #doc
   ]
