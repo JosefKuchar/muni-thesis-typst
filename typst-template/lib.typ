@@ -3,6 +3,8 @@
 #let thesis_blue = rgb("#0000dc")
 #let latex_pdflatex_sans_scale = 0.863
 #let typst_titlepage_sans_correction = 0.83
+#let body_font_size = 12pt
+#let body_leading = 6.25pt
 #let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 31mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
 
@@ -160,11 +162,12 @@
 
 #let declaration_page(title, body, author, advisor) = [
   #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
-  #set par(first-line-indent: 0pt, justify: true, leading: 2.5pt)
+  #set text(size: body_font_size)
+  #set par(first-line-indent: 0pt, justify: true, leading: body_leading)
   #front_title(title)
-  #v(3mm)
+  #v(4mm)
   #body
-  #v(12mm)
+  #v(17mm)
   #align(right)[#author]
   #v(1fr)
   #strong[Advisor:] #advisor
@@ -172,10 +175,11 @@
 
 #let thanks_page(title, body) = [
   #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
-  #set par(first-line-indent: 0pt, justify: false, leading: 2.5pt)
-  #v(171mm)
+  #set text(size: body_font_size)
+  #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
+  #v(1fr)
   #front_title(title)
-  #v(3mm)
+  #v(4mm)
   #body
 ]
 
@@ -319,8 +323,8 @@
   show_list_of_figures: true,
   doc,
 ) = {
-  set text(font: body_fonts, size: 12pt)
-  set par(first-line-indent: 1.5em, justify: true, leading: 2.5pt)
+  set text(font: body_fonts, size: body_font_size)
+  set par(first-line-indent: 1.5em, justify: true, leading: body_leading)
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   show heading.where(level: 1): it => block(
