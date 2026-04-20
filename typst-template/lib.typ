@@ -190,13 +190,14 @@
   keywords,
 ) = [
   #set page(margin: front_matter_page_margin, numbering: "i", number-align: bottom + right)
-  #set par(first-line-indent: 0pt, justify: false, leading: 2.5pt)
+  #set text(size: body_font_size)
+  #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
   #front_title(abstract_title)
-  #v(3mm)
+  #v(4mm)
   #abstract_body
   #v(1fr)
   #front_title(keywords_title)
-  #v(3mm)
+  #v(4mm)
   #keywords.join(", ")
 ]
 
