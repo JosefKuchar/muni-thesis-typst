@@ -8,7 +8,7 @@
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
-#let faculty_logo_color = image("/assets/fi-color.svg", width: 45mm)
+#let faculty_logo_color = image("/assets/fi-color.svg", width: 40mm)
 
 // fithesis under pdfTeX uses tgheros scaled to 0.863. Typst uses the OTF
 // fonts directly, which renders slightly larger, so we keep one explicit
