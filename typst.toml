@@ -8,6 +8,14 @@ description = "Masaryk University Faculty of Informatics thesis template matchin
 categories = ["thesis"]
 keywords = ["masaryk university", "faculty of informatics", "thesis"]
 compiler = "0.14.0"
+exclude = [
+  "/AGENTS.md",
+  "/compare/",
+  "/example/output.pdf",
+  "/scripts/",
+  "/tex-rendered.pdf",
+  "/tex-source/",
+]
 
 [template]
 path = "template"
