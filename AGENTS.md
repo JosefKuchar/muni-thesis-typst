@@ -5,7 +5,7 @@ Do not render the TeX source.
 Compile the Typst output, render both PDFs to PNGs with MuPDF, create blend and side-by-side comparisons with ImageMagick, inspect the first few pages, and iteratively adjust the Typst source toward the TeX reference.
 Focus on template pages first before body content.
 Store comparison assets under compare/focus.
-Prefer the bundled PowerShell scripts over manually repeating the full command sequence.
+Prefer the bundled shell or PowerShell scripts over manually repeating the full command sequence.
 
 ## Goal
 
@@ -27,8 +27,8 @@ Use tex source as secondary reference to understand margins, font sizes, colors 
 - Render PDF pages to PNG with MuPDF (`mutool`).
 - Build visual blends and side-by-side comparisons with ImageMagick (`magick`).
 - Edit only the Typst source when iterating.
-- Prefer `scripts/compile-typst.ps1` and `scripts/compare-focus.ps1` for the standard workflow.
-- Do **not** run `compare-focus.ps1` concurrently with `compile-typst.ps1` or other scripts that read or write the same Typst PDF or comparison asset directories.
+- Prefer `scripts/compile-typst.sh` / `scripts/compare-focus.sh` on Unix-like systems, or `scripts/compile-typst.ps1` / `scripts/compare-focus.ps1` on PowerShell systems, for the standard workflow.
+- Do **not** run `compare-focus.sh`, `compare-focus.ps1`, `compile-typst.sh`, or `compile-typst.ps1` concurrently with each other or other scripts that read or write the same Typst PDF or comparison asset directories.
 - When one of those scripts is running, any other such script must wait until it finishes. Treat the workflow as serialized to avoid data races and partially refreshed comparison assets.
 
 ## Recommended Directory Layout for Comparisons
@@ -60,6 +60,14 @@ Run these scripts one at a time. Do not start another compile, render, or compar
 
 ### 1. Compile Typst
 
+Unix-like shell:
+
+```sh
+./scripts/compile-typst.sh
+```
+
+PowerShell:
+
 ```powershell
 .\scripts\compile-typst.ps1
 ```
@@ -68,17 +76,29 @@ Run these scripts one at a time. Do not start another compile, render, or compar
 
 For the first template pages:
 
+```sh
+./scripts/compare-focus.sh --pages 1-6
+```
+
 ```powershell
 .\scripts\compare-focus.ps1 -Pages 1-6
 ```
 
 For a single page:
 
+```sh
+./scripts/compare-focus.sh --pages 1
+```
+
 ```powershell
 .\scripts\compare-focus.ps1 -Pages 1
 ```
 
 If the PDF is already current and only the comparison assets need regeneration:
+
+```sh
+./scripts/compare-focus.sh --pages 1-3 --skip-compile
+```
 
 ```powershell
 .\scripts\compare-focus.ps1 -Pages 1-3 -SkipCompile
