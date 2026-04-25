@@ -66,9 +66,8 @@ function Invoke-External {
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $templateDir = Split-Path -Parent $scriptDir
-$repoDir = Split-Path -Parent $templateDir
 
-$refPdf = Join-Path $repoDir "tex-rendered.pdf"
+$refPdf = Join-Path $templateDir "tex-rendered.pdf"
 $candidatePdf = Join-Path $templateDir "example/output.pdf"
 $focusDir = Join-Path $templateDir "compare/focus"
 $refDir = Join-Path $focusDir "ref"
