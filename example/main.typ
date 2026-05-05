@@ -1,4 +1,4 @@
-#import "../lib.typ": fithesis, chapter
+#import "../lib.typ": fithesis, chapter, thesis_bibliography, appendix
 
 #let lorem_a = [
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere turpis et
@@ -187,10 +187,8 @@ Notice how the section numbering automatically includes the chapter number
 
 #lorem_b
 
-#pagebreak()
-#bibliography("/tex-source/example.bib", title: [Bibliography], style: "/template/iso-numeric-fithesis.csl")
+#thesis_bibliography("/tex-source/example.bib", title: [Bibliography], style: "/template/iso-numeric-fithesis.csl")
 
-#pagebreak()
-#heading(level: 1, numbering: none, outlined: true)[A #h(0.45em) An appendix]
-
-Here you can insert the appendices of your thesis.
+#appendix[An appendix][
+  Here you can insert the appendices of your thesis.
+]

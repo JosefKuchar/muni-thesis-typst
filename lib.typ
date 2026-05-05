@@ -280,14 +280,19 @@
     none
   } else {
     let current_page = page_values.first()
-    let chapters = query(heading.where(level: 1, outlined: true))
+    let level_one_headings = query(heading.where(level: 1, outlined: true))
+    let opens_on_current_page = level_one_headings.any(entry => {
+      let page = body_page_number(entry.location())
+      page != none and page == current_page
+    })
+    let chapters = level_one_headings
       .filter(entry => entry.numbering != none)
       .filter(entry => {
         let page = body_page_number(entry.location())
         page != none and page < current_page
       })
 
-    if chapters.len() == 0 {
+    if opens_on_current_page or chapters.len() == 0 {
       none
     } else {
       let chapter = chapters.last()
@@ -301,6 +306,32 @@
     }
   }
 }
+
+#let thesis_bibliography(path, title: [Bibliography], style: none) = [
+  #pagebreak()
+  #set page(header: none)
+  #if style == none {
+    bibliography(path, title: title)
+  } else {
+    bibliography(path, title: title, style: style)
+  }
+]
+
+#let appendix(title, body) = [
+  #pagebreak()
+  #set page(
+    margin: body_page_margin,
+    header: body_running_header(),
+    header-ascent: 12pt,
+    numbering: "1",
+    number-align: bottom + right,
+    footer-descent: body_footer_descent,
+  )
+  #set heading(numbering: "A.1.1")
+  #counter(heading).update(0)
+  #heading(level: 1)[#title]
+  #body
+]
 
 #let top_level_outline_entry(prefix, body, page) = block(above: 8pt)[
   #text(weight: "bold")[
