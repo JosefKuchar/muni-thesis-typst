@@ -1,7 +1,98 @@
-#import "../lib.typ": fithesis, chapter, chapter_star
+#import "../lib.typ": fithesis, chapter
+
+#let lorem_a = [
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere turpis et
+  mi vestibulum lacinia. Duis ut ipsum quis nisi vehicula lobortis sed eget
+  purus. Phasellus eu mi id metus fermentum ultricies. Sed mi magna, sagittis
+  iaculis arcu porttitor, semper dapibus augue. Sed at turpis arcu. Maecenas
+  mollis lacus mollis, pellentesque mi vel, pretium ante. Donec ligula dui,
+  finibus vel molestie interdum, tempor eu orci. Vestibulum vitae metus at nulla
+  suscipit eleifend eget eu felis. Sed non risus vitae dui vehicula consequat
+  vel sed elit.
+]
+
+#let lorem_b = [
+  Sed finibus congue nulla, ac egestas nulla maximus eu. Nullam quis ex est.
+  Sed tincidunt eros sit amet commodo feugiat. Pellentesque egestas magna leo,
+  in cursus orci pulvinar nec. Pellentesque efficitur mi dictum, porta metus et,
+  mattis nunc. Sed ut vestibulum risus. Duis eget risus sed ligula convallis
+  laoreet nec ac dui. Vivamus tincidunt nec libero et semper. Sed consectetur
+  velit congue, ornare ligula at, congue ligula. Nulla vitae sem mattis, lacinia
+  metus in, porttitor nunc. Praesent congue ligula dui, et vehicula enim
+  faucibus vitae. Praesent ut mauris at dolor mattis ultrices.
+]
+
+#let lorem_c = [
+  Mauris in justo ut nibh gravida porttitor sed ut turpis. Duis id enim ut
+  lectus consequat facilisis eget id ligula. Donec vitae risus feugiat, placerat
+  orci eu, tincidunt dui. Etiam ex arcu, pharetra non lectus sit amet, molestie
+  dapibus urna. Sed vitae elit in metus facilisis viverra ac nec nunc. Fusce ut
+  leo felis. Fusce dapibus bibendum nibh, at sodales turpis suscipit eu.
+  Maecenas at ullamcorper ipsum, sit amet mollis turpis. Mauris vehicula diam ut
+  felis bibendum commodo. Cras non fringilla enim. Etiam tristique, lacus quis
+  venenatis sodales, quam diam porta magna, ac semper mauris quam at elit. Proin
+  lacinia ipsum ut sagittis consectetur. Donec tincidunt tempus elit id dictum.
+  Duis sit amet est ante. Cras sed lacinia purus, a convallis enim. Donec
+  elementum pretium dignissim.
+]
+
+#let lorem_d = [
+  Cras consectetur metus libero, ac feugiat urna luctus at. Curabitur pharetra
+  odio vel ante mollis, ac placerat magna finibus. Vivamus sed nunc euismod,
+  fermentum magna eget, hendrerit erat. Maecenas tempus ante sed dolor convallis
+  cursus. Vestibulum lacinia tristique consectetur. Praesent ut leo pellentesque,
+  lacinia nisl quis, condimentum ex. Vivamus vel sodales lorem, in mattis justo.
+  Aliquam id sem non enim accumsan dictum ac id ante. Proin varius ex lectus,
+  nec semper risus aliquet ut. Vestibulum eu nunc nulla. Aenean convallis ipsum
+  a risus volutpat elementum. Vivamus in efficitur tortor, eu posuere dolor.
+]
+
+#let lorem_e = [
+  Praesent ac consectetur metus. Praesent iaculis felis at lectus vestibulum
+  mattis. Sed massa tortor, lacinia eget tortor nec, varius tempor risus. Fusce
+  sed nisi at eros dapibus eleifend porta non dui. Lorem ipsum dolor sit amet,
+  consectetur adipiscing elit. Nulla ac metus fermentum, varius ex et,
+  condimentum eros. Donec id ultricies tortor, id elementum turpis. Cras semper
+  viverra eros ac egestas. Vestibulum porttitor dignissim cursus. Mauris
+  consectetur, lacus eget luctus ornare, ante ligula sodales ex, et ultrices
+  turpis ipsum et purus. Etiam sed euismod orci. Vestibulum non arcu quis dolor
+  pellentesque congue. Aliquam erat volutpat. Phasellus vulputate ligula ac
+  volutpat feugiat. Suspendisse auctor egestas felis nec viverra.
+]
+
+#let long_caption = [
+  A placeholder figure with long description - lorem ipsum dolor sit amet lorem
+  ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+  lorem ipsum dolor sit amet
+]
+
+#let thesis_table = figure(
+  kind: table,
+  supplement: none,
+  caption: figure.caption(position: top)[A simple example table.],
+  table(
+    columns: (auto, auto, auto),
+    align: (left, center, right),
+    stroke: 0.45pt,
+    table.header(
+      [#strong[Align Left]],
+      [#strong[Align Center]],
+      [#strong[Align Right]],
+    ),
+    [Apples], [10], [\$1.50],
+    [Bananas], [15], [\$2.00],
+    [Cherries], [50], [\$5.75],
+  ),
+)
+
+#let placeholder_figure(caption) = figure(
+  supplement: none,
+  rect(width: 8cm, height: 4cm, fill: black),
+  caption: caption,
+)
 
 #show: fithesis.with(
-  title: [The Proof of #text(weight: "regular")[P = NP]],
+  title: [The Proof of #text(weight: "regular")[$upright(P) = upright("NP")$]],
   author: [Jane Doe],
   advisor: [Prof. RNDr. John Smith, CSc.],
   department: [Department of Machine Learning and Data Processing],
@@ -16,108 +107,90 @@
     complete reference to the due source.
   ],
   thanks_body: [
-    These are the acknowledgements for my thesis, which can span multiple
-    paragraphs.
+    These are the acknowledgements for my thesis, which can
+
+    span multiple paragraphs.
   ],
   abstract_body: [
-    This is the abstract of my thesis, which can span multiple paragraphs.
+    This is the abstract of my thesis, which can
+
+    span multiple paragraphs.
   ],
-  keywords: ("keyword1", "keyword2", "…"),
+  keywords: ("keyword1", "keyword2", "..."),
 )
 
-#chapter_star[Introduction]
+#chapter[This is a Chapter]
 
-Theses are rumoured to be "the capstones of education", so I decided to write
-one of my own. If all goes well, I will soon have a diploma under my belt. Wish
-me luck!
+First there is a citation @borgman03, and another citation @ehlinger06
 
-Rika se, ze zaverecne prace jsou "vyvrcholenim studia" a tak jsem se rozhodl
-jednu take napsat. Pokud vse pujde podle planu, odnesu si na konci semestru
-diplom. Drzte mi palce!
+#lorem_a
 
-Hovori sa, ze zaverecne prace su "vyvrcholenim studia" a tak som sa rozhodol
-jednu tiez napisat. Ak vsetko pojde podla planu, odnesiem si na konci semestra
-diplom. Drzte mi palce!
+#lorem_b
 
-Man munkelt, dass die Dissertation "die Kronung der Ausbildung" ist. Deshalb
-habe ich mich beschlossen meine eigene zu schreiben. Wenn alles gut geht,
-bekomme ich bald ein Diplom. Wunsch mir Gluck!
+=== This is a Subsection
 
-#chapter[Using lightweight markup]
+Subsections divide sections into smaller, more specific topics. Here is a small
+amount of text under this heading.
 
-If you decide that LaTeX is too wordy for some parts of your document, there are
-tools that allow you to use lighter markup next to it.
+#heading(level: 4, numbering: none, outlined: false)[This is a Subsubsection]
 
-#figure(
-  image("/assets/fi-color.svg", width: 4.8cm),
-  caption: [The old-style seal of the Faculty of Informatics],
-)
+This is a further division of a subsection. The text size remains standard, but
+the heading itself is smaller.
 
-#figure(
-  kind: table,
-  table(
-    columns: 4,
-    align: (right, left, left, center),
-    table.header([Right], [Left], [Default], [Center]),
-    [12], [12], [12], [12],
-    [123], [123], [123], [123],
-    [1], [1], [1], [1],
-  ),
-  caption: [This is a table with different types of alignment.],
-)
+#lorem_c
 
-#chapter[These are]
-== the available
-=== sectioning
+#lorem_d
 
-Inside the text, you can also use unnumbered lists, numbered lists, quotations,
-and basic semantic markup. The exact flow differs from LaTeX, but the thesis
-template keeps the same page geometry and hierarchy.
+#lorem_e
 
-#lorem(140)
+== This is a Section
 
-#chapter[Floats and references]
+#lorem_a
 
-#figure(
-  image("/assets/base-english-color.svg", width: 6.3cm),
-  caption: [The logo of the Masaryk University at 6.3 cm],
-)
+#lorem_b
 
-#figure(
-  kind: table,
-  table(
-    columns: (auto, auto, auto, 1fr),
-    table.header([Day], [Min Temp], [Max Temp], [Summary]),
-    [Monday], [$13 degree C$], [$21 degree C$], [A clear day with low wind and no adverse current advisories.],
-    [Tuesday], [$11 degree C$], [$17 degree C$], [A trough of low pressure will come from the northwest.],
-    [Wednesday], [$10 degree C$], [$21 degree C$], [Rain will spread to all parts during the morning.],
-  ),
-  caption: [A weather forecast],
-)
+#lorem_c
 
-#lorem(180)
+=== Adding a Table
 
-#chapter[Mathematical equations]
+Tables in LaTeX use the `table` environment for floating and the `tabular`
+environment for the actual grid. Table 1.1 demonstrates a simple layout.
 
-Inline equations such as $e^(i x) = cos x + i sin x$ and display equations such
-as
+#thesis_table
 
-$ gamma P x = P A x = P A P^(-1) P x $
+#pagebreak()
 
-#lorem(180)
+=== Figures
 
-#chapter[We have several fonts at disposal]
+#lorem_a
 
-The serified roman font is used for the main body of the text. *Italics* are
-typically used to denote emphasis. `Monospace` text is suited to source code.
+#lorem_b
 
-#lorem(140)
+#placeholder_figure[A placeholder figure (8cm wide by 4cm high).]
 
-#chapter[Inserting the bibliography]
-#lorem(180)
+== Another Section
 
-#chapter[Inserting the index]
-#lorem(180)
+Notice how the section numbering automatically includes the chapter number
+(e.g., Section 1.2).
 
-#chapter[An appendix]
-#lorem(80)
+#chapter[Another chapter]
+
+#lorem_a
+
+#lorem_b
+
+#lorem_a
+
+#lorem_b
+
+#placeholder_figure(long_caption)
+
+#lorem_b
+
+#pagebreak()
+#bibliography("/tex-source/example.bib", title: [Bibliography], style: "/template/iso-numeric-fithesis.csl")
+
+#pagebreak()
+#heading(level: 1, numbering: none, outlined: true)[A #h(0.45em) An appendix]
+
+Here you can insert the appendices of your thesis.

@@ -258,6 +258,50 @@
   }
 }
 
+#let figure_caption_label(kind) = {
+  if kind == table { "Table" } else { "Figure" }
+}
+
+#let figure_caption_prefix(kind) = context {
+  let chapter_values = counter(heading.where(level: 1)).get()
+  let figure_values = counter(figure.where(kind: kind)).get()
+  if chapter_values.len() == 0 or figure_values.len() == 0 {
+    none
+  } else {
+    let chapter = chapter_values.first()
+    let index = figure_values.first()
+    [#figure_caption_label(kind) #numbering("1.1", chapter, index)]
+  }
+}
+
+#let body_running_header() = context {
+  let page_values = counter(page).get()
+  if page_values.len() == 0 {
+    none
+  } else {
+    let current_page = page_values.first()
+    let chapters = query(heading.where(level: 1, outlined: true))
+      .filter(entry => entry.numbering != none)
+      .filter(entry => {
+        let page = body_page_number(entry.location())
+        page != none and page < current_page
+      })
+
+    if chapters.len() == 0 {
+      none
+    } else {
+      let chapter = chapters.last()
+      let prefix = heading_outline_prefix(chapter)
+      align(right)[
+        #text(size: 11pt, font: body_fonts, weight: "regular")[
+          #prefix. #smallcaps(chapter.body)
+        ]
+      ]
+      line(length: 100%, stroke: 0.45pt)
+    }
+  }
+}
+
 #let top_level_outline_entry(prefix, body, page) = block(above: 8pt)[
   #text(weight: "bold")[
     #if prefix != none [#prefix #h(0.45em)]
@@ -365,17 +409,21 @@
   set par(first-line-indent: 1.5em, justify: true, leading: body_leading)
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
-  show heading.where(level: 1): it => block(
-    above: 0pt,
-    below: 20pt,
-    text(font: body_fonts, size: 18pt, weight: "bold")[
-      #if it.numbering == none {
-        it.body
-      } else {
-        [#counter(heading).display(it.numbering) #h(0.45em) #it.body]
-      }
-    ],
-  )
+  show heading.where(level: 1): it => [
+    #counter(figure.where(kind: image)).update(0)
+    #counter(figure.where(kind: table)).update(0)
+    #block(
+      above: 0pt,
+      below: 20pt,
+      text(font: body_fonts, size: 18pt, weight: "bold")[
+        #if it.numbering == none {
+          it.body
+        } else {
+          [#counter(heading).display(it.numbering) #h(0.45em) #it.body]
+        }
+      ],
+    )
+  ]
   show heading.where(level: 2): it => block(
     above: 8pt,
     below: 8pt,
@@ -390,7 +438,9 @@
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
   )
-  show figure.caption: it => text(font: body_fonts, size: 12pt)[#it.body]
+  show figure.caption: it => text(font: body_fonts, size: 12pt)[
+    #strong[#figure_caption_prefix(it.kind):] #it.body
+  ]
   show strong: it => text(weight: "bold", font: body_fonts)[#it.body]
 
   [
@@ -461,6 +511,8 @@
     #pagebreak()
     #set page(
       margin: body_page_margin,
+      header: body_running_header(),
+      header-ascent: 12pt,
       numbering: "1",
       number-align: bottom + right,
       footer-descent: body_footer_descent,
