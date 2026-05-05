@@ -40,6 +40,7 @@
     font: body_fonts,
     size: 18pt,
     weight: "bold",
+    tracking: -0.3pt,
   )[#title],
 )
 
@@ -186,9 +187,9 @@
   #set text(size: body_font_size)
   #set par(first-line-indent: 0pt, justify: true, leading: body_leading)
   #front_title(title)
-  #v(4mm)
+  #v(7mm)
   #body
-  #v(17mm)
+  #v(20mm)
   #align(right)[#author]
   #v(1fr)
   #strong[Advisor:] #advisor
@@ -205,7 +206,7 @@
   #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
   #v(1fr)
   #front_title(title)
-  #v(4mm)
+  #v(7mm)
   #body
 ]
 
@@ -224,11 +225,11 @@
   #set text(size: body_font_size)
   #set par(first-line-indent: 0pt, justify: false, leading: body_leading)
   #front_title(abstract_title)
-  #v(4mm)
+  #v(7mm)
   #abstract_body
   #v(1fr)
   #front_title(keywords_title)
-  #v(4mm)
+  #v(7mm)
   #keywords.join(", ")
 ]
 
