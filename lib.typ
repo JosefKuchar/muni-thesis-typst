@@ -7,7 +7,7 @@
 #let body_leading = 6.25pt
 #let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 58mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
-#let front_matter_footer_descent = 8% + 0pt
+#let front_matter_footer_descent = 0% + 24pt
 #let body_footer_descent = 0% + 20pt
 #let running_header_rule_gap = -2pt
 #let figure_spacing_above = 14pt
