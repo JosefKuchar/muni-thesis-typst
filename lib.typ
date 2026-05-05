@@ -26,12 +26,10 @@
 }
 
 #let chapter(title) = {
-  pagebreak(weak: true)
   heading(level: 1)[#title]
 }
 
 #let chapter_star(title) = {
-  pagebreak(weak: true)
   heading(level: 1, numbering: none, outlined: true)[#title]
 }
 
@@ -456,6 +454,7 @@
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
   show heading.where(level: 1): it => [
+    #pagebreak(weak: true)
     #counter(figure.where(kind: image)).update(0)
     #counter(figure.where(kind: table)).update(0)
     #block(
