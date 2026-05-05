@@ -9,6 +9,7 @@
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
 #let front_matter_footer_descent = 8% + 0pt
 #let body_footer_descent = 0% + 20pt
+#let running_header_rule_gap = -2pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
@@ -298,10 +299,11 @@
       let chapter = chapters.last()
       let prefix = heading_outline_prefix(chapter)
       align(right)[
-        #text(size: 11pt, font: body_fonts, weight: "regular")[
-          #prefix. #smallcaps(chapter.body)
-        ]
+        #text(size: 9pt, font: body_fonts, weight: "regular")[#prefix.]
+        #h(0.08em)
+        #text(size: 12pt, font: body_fonts, weight: "regular")[#smallcaps(chapter.body)]
       ]
+      v(running_header_rule_gap)
       line(length: 100%, stroke: 0.45pt)
     }
   }
@@ -464,8 +466,8 @@
     )
   ]
   show heading.where(level: 2): it => block(
-    above: 22pt,
-    below: 18pt,
+    above: 46pt,
+    below: 22pt,
     text(font: body_fonts, size: 14pt, weight: "bold")[
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
