@@ -5,7 +5,7 @@
 #let typst_titlepage_sans_correction = 0.83
 #let body_font_size = 12pt
 #let body_leading = 6.25pt
-#let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 31mm)
+#let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 58mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
 #let front_matter_footer_descent = 8% + 0pt
 #let body_footer_descent = 0% - 12pt
@@ -333,7 +333,10 @@
   #body
 ]
 
-#let top_level_outline_entry(prefix, body, page) = block(above: 8pt)[
+#let contents_top_level_spacing = 15pt
+#let contents_entry_spacing = 7pt
+
+#let top_level_outline_entry(prefix, body, page) = block(above: contents_top_level_spacing)[
   #text(weight: "bold")[
     #if prefix != none [#prefix #h(0.7em)]
     #body
@@ -342,7 +345,7 @@
   #page
 ]
 
-#let nested_outline_entry(indent, prefix, body, page) = block[
+#let nested_outline_entry(indent, prefix, body, page) = block(above: contents_entry_spacing)[
   #h(indent)
   #if prefix != none [#prefix #h(0.7em)]
   #body
@@ -437,7 +440,12 @@
   doc,
 ) = {
   set text(font: body_fonts, size: body_font_size)
-  set par(first-line-indent: 1.5em, justify: true, leading: body_leading)
+  set par(
+    first-line-indent: 1.5em,
+    justify: true,
+    leading: body_leading,
+    spacing: 6pt,
+  )
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   show heading.where(level: 1): it => [
@@ -445,26 +453,26 @@
     #counter(figure.where(kind: table)).update(0)
     #block(
       above: 0pt,
-      below: 20pt,
+      below: 26pt,
       text(font: body_fonts, size: 18pt, weight: "bold")[
         #if it.numbering == none {
           it.body
         } else {
-          [#counter(heading).display(it.numbering) #h(0.45em) #it.body]
+          [#counter(heading).display(it.numbering) #h(0.2em) #it.body]
         }
       ],
     )
   ]
   show heading.where(level: 2): it => block(
-    above: 8pt,
-    below: 8pt,
+    above: 22pt,
+    below: 18pt,
     text(font: body_fonts, size: 14pt, weight: "bold")[
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
   )
   show heading.where(level: 3): it => block(
-    above: 8pt,
-    below: 8pt,
+    above: 22pt,
+    below: 14pt,
     text(font: body_fonts, size: 12pt, weight: "bold")[
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
