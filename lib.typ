@@ -335,7 +335,7 @@
 
 #let top_level_outline_entry(prefix, body, page) = block(above: 8pt)[
   #text(weight: "bold")[
-    #if prefix != none [#prefix #h(0.45em)]
+    #if prefix != none [#prefix #h(0.7em)]
     #body
   ]
   #h(1fr)
@@ -344,7 +344,7 @@
 
 #let nested_outline_entry(indent, prefix, body, page) = block[
   #h(indent)
-  #if prefix != none [#prefix #h(0.45em)]
+  #if prefix != none [#prefix #h(0.7em)]
   #body
   #box(width: 1fr, outline_fill)
   #page
@@ -375,12 +375,12 @@
       } else if entry.level == 2 {
         link(
           entry.location(),
-          nested_outline_entry(1.8em, prefix, entry.body, page),
+          nested_outline_entry(1.5em, prefix, entry.body, page),
         )
       } else {
         link(
           entry.location(),
-          nested_outline_entry(5.2em, prefix, entry.body, page),
+          nested_outline_entry(3.7em, prefix, entry.body, page),
         )
       }
     }
