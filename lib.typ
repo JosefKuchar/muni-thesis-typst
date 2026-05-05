@@ -477,6 +477,11 @@
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
   )
+  show heading.where(level: 4): it => block(
+    above: 22pt,
+    below: 14pt,
+    it.body,
+  )
   show figure.caption: it => text(font: body_fonts, size: 12pt)[
     #strong[#figure_caption_prefix(it.kind):] #it.body
   ]
