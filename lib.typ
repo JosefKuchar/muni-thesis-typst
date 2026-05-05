@@ -73,24 +73,24 @@
   #align(center)[
     #v(46mm)
     #image("/assets/base-english-mono.svg", width: 61.2mm)
-    #v(6mm)
+    #v(9mm)
     #centered_titlepage_text(
       upper(faculty_name),
       titlepage_font_size(18),
     )
-    #v(18mm)
+    #v(22mm)
     #centered_titlepage_text(
       title,
       titlepage_font_size(30),
       weight: "bold",
       width: 129mm,
     )
-    #v(14mm)
+    #v(16mm)
     #centered_titlepage_text(
       thesis_type,
       titlepage_font_size(22),
     )
-    #v(14mm)
+    #v(18mm)
     #centered_titlepage_text(
       upper(author),
       titlepage_font_size(25),
@@ -123,12 +123,12 @@
   #align(center)[
     #v(46mm)
     #university_logo_color
-    #v(6mm)
+    #v(9mm)
     #centered_titlepage_text(
       upper(faculty_name),
       titlepage_font_size(18),
     )
-    #v(18mm)
+    #v(22mm)
     #centered_titlepage_text(
       title,
       titlepage_font_size(30),
@@ -136,12 +136,12 @@
       fill: thesis_blue,
       width: 129mm,
     )
-    #v(14mm)
+    #v(16mm)
     #centered_titlepage_text(
       thesis_type,
       titlepage_font_size(22),
     )
-    #v(14mm)
+    #v(18mm)
     #centered_titlepage_text(
       upper(author),
       titlepage_font_size(25),
@@ -151,12 +151,12 @@
       [Advisor: #advisor],
       titlepage_font_size(18),
     )
-    #v(5mm)
+    #v(8mm)
     #centered_titlepage_text(
       department,
       titlepage_font_size(18),
     )
-    #v(17mm)
+    #v(20mm)
     #centered_titlepage_text(
       [#place_name, #semester],
       titlepage_font_size(18),
