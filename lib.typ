@@ -8,7 +8,7 @@
 #let body_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 58mm)
 #let front_matter_page_margin = (left: 44.5mm, right: 38.5mm, top: 46mm, bottom: 60mm)
 #let front_matter_footer_descent = 8% + 0pt
-#let body_footer_descent = 0% - 12pt
+#let body_footer_descent = 0% + 20pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
