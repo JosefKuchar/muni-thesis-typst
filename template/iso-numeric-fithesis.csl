@@ -62,7 +62,7 @@
       </group>
     </group>
   </macro>
-  <bibliography et-al-min="9" et-al-use-first="8">
+  <bibliography et-al-min="9" et-al-use-first="8" second-field-align="flush">
     <layout>
       <text variable="citation-number" suffix=". "/>
       <choose>
