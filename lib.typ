@@ -10,6 +10,9 @@
 #let front_matter_footer_descent = 8% + 0pt
 #let body_footer_descent = 0% + 20pt
 #let running_header_rule_gap = -2pt
+#let figure_spacing_above = 14pt
+#let figure_spacing_below = 12pt
+#let figure_caption_gap = 12pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
@@ -450,13 +453,14 @@
   )
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
+  set figure(gap: figure_caption_gap)
   show heading.where(level: 1): it => [
     #counter(figure.where(kind: image)).update(0)
     #counter(figure.where(kind: table)).update(0)
     #block(
       above: 0pt,
       below: 26pt,
-      text(font: body_fonts, size: 18pt, weight: "bold")[
+      text(font: body_fonts, size: 18pt, weight: "bold", tracking: -0.3pt)[
         #if it.numbering == none {
           it.body
         } else {
@@ -468,7 +472,7 @@
   show heading.where(level: 2): it => block(
     above: 46pt,
     below: 22pt,
-    text(font: body_fonts, size: 14pt, weight: "bold")[
+    text(font: body_fonts, size: 14pt, weight: "bold", tracking: 0.2pt)[
       #counter(heading).display(it.numbering) #h(0.45em) #it.body
     ],
   )
@@ -476,13 +480,18 @@
     above: 22pt,
     below: 14pt,
     text(font: body_fonts, size: 12pt, weight: "bold")[
-      #counter(heading).display(it.numbering) #h(0.45em) #it.body
+      #counter(heading).display(it.numbering) #h(0.3em) #it.body
     ],
   )
   show heading.where(level: 4): it => block(
     above: 22pt,
     below: 14pt,
     it.body,
+  )
+  show figure: it => block(
+    above: figure_spacing_above,
+    below: figure_spacing_below,
+    it,
   )
   show figure.caption: it => text(font: body_fonts, size: 12pt)[
     #strong[#figure_caption_prefix(it.kind):] #it.body
