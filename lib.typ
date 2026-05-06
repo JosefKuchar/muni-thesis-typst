@@ -14,8 +14,8 @@
 #let figure_spacing_above = 14pt
 #let figure_spacing_below = 12pt
 #let figure_caption_gap = 12pt
-#let equation_spacing_above = 10pt
-#let equation_spacing_below = 10pt
+#let equation_spacing_above = 20pt
+#let equation_spacing_below = 20pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
