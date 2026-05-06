@@ -437,6 +437,7 @@
         entry.location(),
         nested_outline_entry(0pt, prefix, entry.caption.body, page),
       )
+      v(4pt)
     }
   }
 ]
