@@ -34,7 +34,7 @@
     </date>
   </macro>
   <macro name="accessed">
-    <date variable="accessed" prefix=" [visited on " suffix="]">
+    <date variable="accessed" prefix="visited on ">
       <date-part name="year"/>
       <date-part name="month" prefix="-"/>
       <date-part name="day" prefix="-"/>
@@ -104,7 +104,10 @@
         <text variable="ISBN"/>
       </group>
       <text variable="DOI" prefix="DOI: "/>
-      <text variable="URL" prefix="Available from: "/>
+      <group delimiter=" ">
+        <text variable="URL" prefix="Available from: "/>
+        <text macro="accessed" prefix="[" suffix="]"/>
+      </group>
     </group>
   </macro>
   <macro name="book">
