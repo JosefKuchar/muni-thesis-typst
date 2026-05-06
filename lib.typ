@@ -313,7 +313,7 @@
   }
 }
 
-#let thesis_bibliography(path, title: [Bibliography], style: none) = [
+#let thesis_bibliography(path, title: [Bibliography], style: "/template/iso-numeric-fithesis.csl") = [
   #pagebreak()
   #set page(header: none)
   #if style == none {
