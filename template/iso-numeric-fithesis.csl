@@ -6,7 +6,7 @@
     <updated>2026-05-05T00:00:00+00:00</updated>
   </info>
   <citation collapse="citation-number">
-    <layout prefix="[" suffix="]" delimiter=", ">
+    <layout delimiter=", ">
       <text variable="citation-number"/>
     </layout>
   </citation>
