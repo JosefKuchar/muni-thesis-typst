@@ -1,6 +1,6 @@
 [package]
 name = "fi-muni-thesis"
-version = "0.2.0"
+version = "1.0.0"
 entrypoint = "lib.typ"
 authors = ["Josef Kuchař", "OpenAI Codex"]
 license = "MIT"

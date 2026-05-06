@@ -18,7 +18,7 @@ the template still works and falls back to sane default fonts.
 ## Usage
 
 ```typst
-#import "@git/fi-muni-thesis:0.2.0": fithesis, thesis_bibliography
+#import "@git/fi-muni-thesis:1.0.0": fithesis, thesis_bibliography
 
 #show: fithesis.with(
   title: [Example Thesis Title],

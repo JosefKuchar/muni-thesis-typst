@@ -1,4 +1,4 @@
-#import "@preview/fi-muni-thesis:0.1.0": fithesis, chapter, chapter_star
+#import "@preview/fi-muni-thesis:1.0.0": fithesis, chapter, chapter_star
 
 #show: fithesis.with(
   title: [The Proof of #text(weight: "regular")[P = NP]],
