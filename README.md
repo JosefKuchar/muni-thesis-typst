@@ -59,3 +59,10 @@ Your thesis text starts here.
 ```
 
 See `example/main.typ` for a complete example.
+
+## How this was created
+
+This Typst template was created with agent-assisted iteration. The rendered TeX
+PDF was used as the visual reference, comparison scripts rendered both versions
+to images, and the layout was refined through visual inspection and manual
+Typst adjustments.
