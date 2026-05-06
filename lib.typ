@@ -317,7 +317,6 @@
 #let thesis_bibliography(sources, title: [Bibliography], style: "/template/iso-numeric-fithesis.csl") = [
   #pagebreak()
   #set page(header: none)
-  #show link: set text(fill: link_blue)
   #if style == none {
     bibliography(sources, title: title)
   } else {
@@ -391,6 +390,7 @@
     footer-descent: body_footer_descent,
   )
   #set par(first-line-indent: 0pt)
+  #show link: set text(fill: black)
   #front_title(title)
   #v(2mm)
   #context {
@@ -428,6 +428,7 @@
     footer-descent: body_footer_descent,
   )
   #set par(first-line-indent: 0pt)
+  #show link: set text(fill: black)
   #front_title(title)
   #v(6mm)
   #context {
@@ -480,6 +481,7 @@
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
+  show link: set text(fill: link_blue)
   show cite: it => box[\[#text(fill: link_blue)[#it]\]]
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
