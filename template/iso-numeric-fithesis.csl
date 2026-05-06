@@ -34,11 +34,14 @@
     </date>
   </macro>
   <macro name="accessed">
-    <date variable="accessed" prefix="visited on ">
-      <date-part name="year"/>
-      <date-part name="month" prefix="-"/>
-      <date-part name="day" prefix="-"/>
-    </date>
+    <group delimiter=" ">
+      <text value="accessed" font-variant="small-caps"/>
+      <date variable="accessed">
+        <date-part name="year"/>
+        <date-part name="month" prefix="-"/>
+        <date-part name="day" prefix="-"/>
+      </date>
+    </group>
   </macro>
   <macro name="title">
     <text variable="title"/>
@@ -100,12 +103,18 @@
   <macro name="identifiers">
     <group delimiter=". ">
       <group delimiter=" ">
-        <text value="ISBN"/>
+        <text value="isbn" font-variant="small-caps"/>
         <text variable="ISBN"/>
       </group>
-      <text variable="DOI" prefix="DOI: "/>
       <group delimiter=" ">
-        <text variable="URL" prefix="Available from: "/>
+        <text value="doi:" font-variant="small-caps"/>
+        <text variable="DOI"/>
+      </group>
+      <group delimiter=" ">
+        <group delimiter=" ">
+          <text value="available from:" font-variant="small-caps"/>
+          <text variable="URL"/>
+        </group>
         <text macro="accessed" prefix="[" suffix="]"/>
       </group>
     </group>
