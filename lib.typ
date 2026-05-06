@@ -479,9 +479,7 @@
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
-  show cite: it => [
-    \[#text(fill: thesis_blue)[#it]\]
-  ]
+  show cite: it => box[\[#text(fill: thesis_blue)[#it]\]]
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
     #counter(figure.where(kind: image)).update(0)
