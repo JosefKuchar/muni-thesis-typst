@@ -341,20 +341,34 @@
 #let contents_entry_spacing = 7pt
 
 #let top_level_outline_entry(prefix, body, page) = block(above: contents_top_level_spacing)[
-  #text(weight: "bold")[
-    #if prefix != none [#prefix #h(0.7em)]
-    #body
-  ]
-  #h(1fr)
-  #page
+  #set par(justify: false)
+  #grid(
+    columns: (1fr, auto),
+    column-gutter: 0.7em,
+    [
+      #text(weight: "bold")[
+        #if prefix != none [#prefix #h(0.7em)]
+        #body
+        #box(width: 1fr, outline_fill)
+      ]
+    ],
+    align(bottom)[#page],
+  )
 ]
 
 #let nested_outline_entry(indent, prefix, body, page) = block(above: contents_entry_spacing)[
-  #h(indent)
-  #if prefix != none [#prefix #h(0.7em)]
-  #body
-  #box(width: 1fr, outline_fill)
-  #page
+  #set par(justify: false)
+  #grid(
+    columns: (indent, 1fr, auto),
+    column-gutter: 0pt,
+    [],
+    [
+      #if prefix != none [#prefix #h(0.7em)]
+      #body
+      #box(width: 1fr, outline_fill)
+    ],
+    align(bottom)[#page],
+  )
 ]
 
 #let contents_page(title) = [
