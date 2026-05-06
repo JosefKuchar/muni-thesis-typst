@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0.2" class="in-text" default-locale="en-US">
   <info>
     <title>FI Thesis ISO Numeric</title>
     <id>https://example.invalid/fi-thesis-iso-numeric</id>
@@ -15,6 +15,11 @@
       <name name-as-sort-order="all" sort-separator=", " delimiter=", ">
         <name-part name="family" text-case="uppercase"/>
       </name>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="publisher"/>
+        <text variable="title"/>
+      </substitute>
     </names>
   </macro>
   <macro name="issued-year">
@@ -22,25 +27,164 @@
       <date-part name="year"/>
     </date>
   </macro>
+  <macro name="issued-month-year">
+    <date variable="issued">
+      <date-part name="month" form="long" suffix=" "/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+  <macro name="accessed">
+    <date variable="accessed" prefix=" [visited on " suffix="]">
+      <date-part name="year"/>
+      <date-part name="month" prefix="-"/>
+      <date-part name="day" prefix="-"/>
+    </date>
+  </macro>
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+  <macro name="title-italic">
+    <text variable="title" font-style="italic"/>
+  </macro>
+  <macro name="edition">
+    <group>
+      <number variable="edition" form="ordinal"/>
+      <text value=" ed."/>
+    </group>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+  <macro name="container">
+    <choose>
+      <if variable="container-title">
+        <group delimiter=", ">
+          <text variable="container-title" font-style="italic"/>
+          <group delimiter=" ">
+            <text variable="volume"/>
+            <text variable="issue" prefix="(" suffix=")"/>
+          </group>
+          <text variable="page" prefix="pp. "/>
+        </group>
+      </if>
+      <else-if variable="collection-title">
+        <group delimiter=", ">
+          <text variable="collection-title" font-style="italic"/>
+          <text variable="page" prefix="pp. "/>
+        </group>
+      </else-if>
+      <else-if variable="event-title">
+        <group delimiter=", ">
+          <text variable="event-title" font-style="italic"/>
+          <text variable="page" prefix="pp. "/>
+        </group>
+      </else-if>
+      <else-if variable="event">
+        <group delimiter=", ">
+          <text macro="event"/>
+          <text variable="page" prefix="pp. "/>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="event">
+    <group delimiter=", ">
+      <text variable="event-title"/>
+      <text variable="event"/>
+      <text variable="event-place"/>
+    </group>
+  </macro>
+  <macro name="identifiers">
+    <group delimiter=". ">
+      <group delimiter=" ">
+        <text value="ISBN"/>
+        <text variable="ISBN"/>
+      </group>
+      <text variable="DOI" prefix="DOI: "/>
+      <text variable="URL" prefix="Available from: "/>
+    </group>
+  </macro>
   <macro name="book">
     <group delimiter=". " suffix=".">
       <text macro="author-sort"/>
-      <text variable="title" font-style="italic"/>
-      <group>
-        <number variable="edition" form="ordinal"/>
-        <text value=" ed."/>
-      </group>
+      <text macro="title-italic"/>
+      <text macro="edition"/>
       <group delimiter=", ">
-        <group delimiter=": ">
-          <text variable="publisher-place"/>
-          <text variable="publisher"/>
-        </group>
+        <text macro="publisher"/>
         <text macro="issued-year"/>
       </group>
+      <text macro="identifiers"/>
+    </group>
+  </macro>
+  <macro name="article">
+    <group delimiter=". " suffix=".">
+      <text macro="author-sort"/>
+      <text macro="title"/>
+      <text macro="container"/>
+      <text macro="issued-year"/>
+      <text macro="identifiers"/>
+      <text macro="accessed"/>
+    </group>
+  </macro>
+  <macro name="chapter">
+    <group delimiter=". " suffix=".">
+      <text macro="author-sort"/>
+      <text macro="title"/>
       <group delimiter=" ">
-        <text value="ISBN" text-case="lowercase"/>
-        <text variable="ISBN"/>
+        <text value="In:"/>
+        <choose>
+          <if variable="container-title">
+            <text variable="container-title" font-style="italic"/>
+          </if>
+          <else-if variable="collection-title">
+            <text variable="collection-title" font-style="italic"/>
+          </else-if>
+          <else-if variable="event-title">
+            <text variable="event-title" font-style="italic"/>
+          </else-if>
+          <else-if variable="event">
+            <text macro="event" font-style="italic"/>
+          </else-if>
+        </choose>
       </group>
+      <group delimiter=", ">
+        <text macro="publisher"/>
+        <text macro="issued-month-year"/>
+        <text variable="page" prefix="pp. "/>
+      </group>
+      <text macro="identifiers"/>
+    </group>
+  </macro>
+  <macro name="report">
+    <group delimiter=". " suffix=".">
+      <text macro="author-sort"/>
+      <text macro="title"/>
+      <group delimiter=", ">
+        <text variable="genre"/>
+        <text variable="number"/>
+      </group>
+      <group delimiter=", ">
+        <text macro="publisher"/>
+        <text macro="issued-year"/>
+      </group>
+      <text macro="identifiers"/>
+      <text macro="accessed"/>
+    </group>
+  </macro>
+  <macro name="thesis">
+    <group delimiter=". " suffix=".">
+      <text macro="author-sort"/>
+      <text macro="title-italic"/>
+      <group delimiter=", ">
+        <text variable="genre"/>
+        <text macro="publisher"/>
+        <text macro="issued-year"/>
+      </group>
+      <text macro="identifiers"/>
+      <text macro="accessed"/>
     </group>
   </macro>
   <macro name="patent">
@@ -69,6 +213,33 @@
         <if type="patent">
           <text macro="patent"/>
         </if>
+        <else-if type="article-journal article-magazine article-newspaper article">
+          <text macro="article"/>
+        </else-if>
+        <else-if type="chapter paper-conference">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if variable="container-title">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if variable="collection-title">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if variable="event-title">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if variable="event">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if type="report webpage post-weblog">
+          <text macro="report"/>
+        </else-if>
+        <else-if variable="genre">
+          <text macro="report"/>
+        </else-if>
+        <else-if type="thesis">
+          <text macro="thesis"/>
+        </else-if>
         <else>
           <text macro="book"/>
         </else>
