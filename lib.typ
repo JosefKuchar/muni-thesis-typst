@@ -13,6 +13,8 @@
 #let figure_spacing_above = 14pt
 #let figure_spacing_below = 12pt
 #let figure_caption_gap = 12pt
+#let equation_spacing_above = 10pt
+#let equation_spacing_below = 10pt
 
 #let university_logo_color = image("/assets/base-english-color.svg", width: 61mm)
 #let university_logo_mono = image("/assets/base-english-mono.svg", width: 61mm)
@@ -519,6 +521,11 @@
   show figure.caption: it => text(font: body_fonts, size: 12pt)[
     #strong[#figure_caption_prefix(it.kind):] #it.body
   ]
+  show math.equation.where(block: true): it => block(
+    above: equation_spacing_above,
+    below: equation_spacing_below,
+    it,
+  )
   show strong: it => text(weight: "bold", font: body_fonts)[#it.body]
 
   [
