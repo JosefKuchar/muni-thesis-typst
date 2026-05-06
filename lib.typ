@@ -1,6 +1,7 @@
 #let body_fonts = ("TeX Gyre Pagella", "Palatino Linotype", "Book Antiqua", "New Computer Modern")
 #let sans_fonts = ("TeX Gyre Heros", "Arial", "New Computer Modern")
 #let thesis_blue = rgb("#0000dc")
+#let link_blue = rgb("#0b57b7")
 #let latex_pdflatex_sans_scale = 0.863
 #let typst_titlepage_sans_correction = 0.83
 #let body_font_size = 12pt
@@ -316,7 +317,7 @@
 #let thesis_bibliography(sources, title: [Bibliography], style: "/template/iso-numeric-fithesis.csl") = [
   #pagebreak()
   #set page(header: none)
-  #show link: set text(fill: thesis_blue)
+  #show link: set text(fill: link_blue)
   #if style == none {
     bibliography(sources, title: title)
   } else {
@@ -479,7 +480,7 @@
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
-  show cite: it => box[\[#text(fill: thesis_blue)[#it]\]]
+  show cite: it => box[\[#text(fill: link_blue)[#it]\]]
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
     #counter(figure.where(kind: image)).update(0)
