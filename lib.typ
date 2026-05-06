@@ -280,6 +280,41 @@
   }
 }
 
+#let figure_reference_number(kind, loc) = context {
+  let chapter = chapter_number_at(loc)
+  let entries = query(figure.where(kind: kind))
+  let matched_index = none
+
+  for (index, entry) in entries.enumerate() {
+    if entry.location() == loc {
+      matched_index = index
+    }
+  }
+
+  if chapter == none or matched_index == none {
+    none
+  } else {
+    let local_index = entries
+      .slice(0, matched_index + 1)
+      .filter(entry => chapter_number_at(entry.location()) == chapter)
+      .len()
+
+    numbering("1.1", chapter, local_index)
+  }
+}
+
+#let figure_reference(ref) = {
+  let elem = ref.element
+  let label = figure_caption_label(elem.kind)
+  let number = figure_reference_number(elem.kind, elem.location())
+
+  if number == none {
+    ref
+  } else {
+    link(ref.target)[#text(fill: black)[#label] #text(fill: link_blue)[#number]]
+  }
+}
+
 #let body_running_header() = context {
   let page_values = counter(page).get()
   if page_values.len() == 0 {
@@ -483,6 +518,13 @@
   set figure(gap: figure_caption_gap)
   show link: set text(fill: link_blue)
   show cite: it => box[\[#text(fill: link_blue)[#it]\]]
+  show ref: it => {
+    if it.element != none and it.element.func() == figure {
+      figure_reference(it)
+    } else {
+      it
+    }
+  }
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
     #counter(figure.where(kind: image)).update(0)
