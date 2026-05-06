@@ -337,33 +337,41 @@
   #body
 ]
 
-#let contents_top_level_spacing = 15pt
-#let contents_entry_spacing = 7pt
+#let contents_top_level_spacing = 20pt
+#let contents_entry_spacing = 6pt
 
-#let top_level_outline_entry(prefix, body, page) = block(above: contents_top_level_spacing)[
+#let top_level_outline_entry(prefix, body, page, prefix-width: 0.7em) = block(above: contents_top_level_spacing)[
   #set par(justify: false)
-  #grid(
-    columns: (1fr, auto),
-    column-gutter: 0.7em,
-    [
-      #text(weight: "bold")[
-        #if prefix != none [#prefix #h(0.7em)]
-        #body
-        #box(width: 1fr, outline_fill)
-      ]
-    ],
-    align(bottom)[#page],
-  )
+  #if prefix == none {
+    grid(
+      columns: (1fr, auto),
+      column-gutter: 0.7em,
+      [#text(weight: "bold")[#body #box(width: 1fr, outline_fill)]], align(bottom)[#page],
+    )
+  } else {
+    grid(
+      columns: (prefix-width, 1fr, auto),
+      column-gutter: 0.7em,
+      text(weight: "bold")[#prefix],
+      [
+        #text(weight: "bold")[
+          #body
+          #box(width: 1fr, outline_fill)
+        ]
+      ],
+      align(bottom)[#page],
+    )
+  }
 ]
 
-#let nested_outline_entry(indent, prefix, body, page) = block(above: contents_entry_spacing)[
+#let nested_outline_entry(indent, prefix, body, page, prefix-width: 1.8em) = block(above: contents_entry_spacing)[
   #set par(justify: false)
   #grid(
-    columns: (indent, 1fr, auto),
-    column-gutter: 0pt,
+    columns: (indent, prefix-width, 1fr, auto),
+    column-gutter: (0pt, 0.7em, 0.7em),
     [],
+    if prefix == none { [] } else { [#prefix] },
     [
-      #if prefix != none [#prefix #h(0.7em)]
       #body
       #box(width: 1fr, outline_fill)
     ],
@@ -380,7 +388,7 @@
   )
   #set par(first-line-indent: 0pt)
   #front_title(title)
-  #v(6mm)
+  #v(2mm)
   #context {
     let entries = query(heading.where(outlined: true)).filter(entry => entry.level <= 3)
 
@@ -396,7 +404,7 @@
       } else if entry.level == 2 {
         link(
           entry.location(),
-          nested_outline_entry(1.5em, prefix, entry.body, page),
+          nested_outline_entry(1.2em, prefix, entry.body, page),
         )
       } else {
         link(
