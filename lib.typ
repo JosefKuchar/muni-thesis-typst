@@ -316,6 +316,7 @@
 #let thesis_bibliography(sources, title: [Bibliography], style: "/template/iso-numeric-fithesis.csl") = [
   #pagebreak()
   #set page(header: none)
+  #show link: set text(fill: thesis_blue)
   #if style == none {
     bibliography(sources, title: title)
   } else {
@@ -478,6 +479,7 @@
   set heading(numbering: "1.1.1")
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
+  show cite: set text(fill: thesis_blue)
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
     #counter(figure.where(kind: image)).update(0)

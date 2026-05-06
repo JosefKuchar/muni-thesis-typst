@@ -112,7 +112,7 @@
       </group>
       <group delimiter=" ">
         <group delimiter=" ">
-          <text value="available from:" font-variant="small-caps"/>
+          <text value="url:" font-variant="small-caps"/>
           <text variable="URL"/>
         </group>
         <text macro="accessed" prefix="[" suffix="]"/>
