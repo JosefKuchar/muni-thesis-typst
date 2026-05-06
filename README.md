@@ -1,46 +1,61 @@
-# Masaryk University Thesis Typst Template
+# FI MUNI Thesis Typst Template
 
-> Work in progress: this template is still being ported and visually aligned.
-
-This project is a Typst port of the Masaryk University thesis template from the
-`fithesis4` LaTeX template. The goal is to provide a Typst template that follows
-the Faculty of Informatics thesis layout while keeping the source easier to edit
-and maintain.
+Typst port of
+[`fithesis4` for the Faculty of Informatics at Masaryk University](https://www.overleaf.com/latex/templates/fithesis4-for-the-faculty-of-informatics-at-the-masaryk-university-in-brno/qmrtczzjvpfv).
 
 ## Installation
-
-Install the template with:
 
 ```sh
 npx typst-dl https://github.com/JosefKuchar/muni-thesis-typst
 ```
 
+## Fonts
+
+The `fonts/` directory contains the fonts used by the original LaTeX template.
+Install them on your system if you want the closest visual match. Without them,
+the template still works and falls back to sane default fonts.
+
 ## Usage
 
-The main example lives in `example/main.typ` and imports the template from
-`lib.typ`.
+```typst
+#import "@git/fi-muni-thesis:0.2.0": fithesis, thesis_bibliography
 
-Compile the example with:
+#show: fithesis.with(
+  title: [Example Thesis Title],
+  author: [Jane Student],
+  advisor: [doc. John Advisor, Ph.D.],
+  department: [Department of Computer Systems and Communications],
+  faculty_name: [Faculty of Informatics],
+  thesis_type: [Master's Thesis],
+  place: "Brno",
+  semester: "Spring 2026",
+  declaration_body: [
+    Hereby I declare that this thesis is my original work and that all sources
+    used are properly cited.
+  ],
+  thanks_body: [
+    I would like to thank my advisor for guidance and feedback.
+  ],
+  abstract_body: [
+    This thesis studies a selected topic in computer science and presents the
+    design, implementation, and evaluation of the proposed solution.
+  ],
+  keywords: (
+    "typst",
+    "thesis",
+    "masaryk university",
+  ),
+)
 
-```sh
-typst compile --root . --font-path ./fonts example/main.typ example/output.pdf
+= Introduction
+
+Your thesis text starts here.
+
+#thesis_bibliography(read("references.bib", encoding: none))
+
+#appendix[An Appendix][
+  Appendix content goes here.
+]
 ```
 
-The `--font-path ./fonts` flag is important so Typst uses the bundled fonts
-instead of substituting system fonts.
-
-## Project Structure
-
-- `lib.typ` - main template logic
-- `example/main.typ` - example thesis document
-- `template/` - packaged Typst template entrypoint
-- `assets/` - logos and visual assets
-- `fonts/` - bundled fonts used by the template
-- `tex-rendered.pdf` - rendered LaTeX reference used for visual comparison
-- `scripts/` - helper scripts for compiling and comparing outputs
-
-## Reference
-
-The visual reference is the already rendered `tex-rendered.pdf`. The original
-LaTeX source under `tex-source/` is useful for understanding layout choices, but
-the reference PDF is the source of truth for visual alignment.
+See `example/main.typ` for a complete example.
