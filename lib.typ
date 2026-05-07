@@ -315,6 +315,13 @@
   }
 }
 
+#let appendix_reference(ref) = {
+  let elem = ref.element
+  let number = context numbering(elem.numbering, ..counter(heading).at(elem.location()))
+
+  link(ref.target)[#text(fill: black)[Appendix ]#text(fill: link_blue)[#number]]
+}
+
 #let body_running_header() = context {
   let page_values = counter(page).get()
   if page_values.len() == 0 {
@@ -524,6 +531,8 @@
   show ref: it => {
     if it.element != none and it.element.func() == figure {
       figure_reference(it)
+    } else if it.element != none and it.element.func() == heading and it.element.level == 1 and it.element.numbering == "A.1.1" {
+      appendix_reference(it)
     } else {
       it
     }
