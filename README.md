@@ -18,7 +18,7 @@ the template still works and falls back to sane default fonts.
 ## Usage
 
 ```typst
-#import "@git/fi-muni-thesis:1.0.0": fithesis, thesis_bibliography
+#import "@git/fi-muni-thesis:1.0.0": fithesis, thesis_bibliography, appendix
 
 #show: fithesis.with(
   title: [Example Thesis Title],
@@ -53,9 +53,11 @@ Your thesis text starts here.
 
 #thesis_bibliography(read("references.bib", encoding: none))
 
-#appendix[An Appendix][
+#appendix(label: <app:example>)[An Appendix][
   Appendix content goes here.
 ]
+
+See @app:example for details.
 ```
 
 See `example/main.typ` for a complete example.

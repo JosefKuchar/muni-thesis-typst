@@ -359,7 +359,7 @@
   }
 ]
 
-#let appendix(title, body) = [
+#let appendix(title, body, label: none) = [
   #pagebreak()
   #set page(
     margin: body_page_margin,
@@ -372,6 +372,9 @@
   #set heading(numbering: "A.1.1")
   #counter(heading).update(0)
   #heading(level: 1)[#title]
+  #if label != none {
+    label
+  }
   #body
 ]
 

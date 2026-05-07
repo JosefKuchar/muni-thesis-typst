@@ -187,8 +187,10 @@ Notice how the section numbering automatically includes the chapter number
 
 #lorem_b
 
+See @app:example for appendix material.
+
 #thesis_bibliography("/tex-source/example.bib")
 
-#appendix[An appendix][
+#appendix(label: <app:example>)[An appendix][
   Here you can insert the appendices of your thesis.
 ]
