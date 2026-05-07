@@ -527,7 +527,7 @@
   set outline(indent: auto)
   set figure(gap: figure_caption_gap)
   show link: set text(fill: link_blue)
-  show cite: it => box[\[#text(fill: link_blue)[#it]\]]
+  show cite: it => text(fill: link_blue)[#it]
   show ref: it => {
     if it.element != none and it.element.func() == figure {
       figure_reference(it)
